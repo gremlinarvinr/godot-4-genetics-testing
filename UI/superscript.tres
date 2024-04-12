@@ -1,0 +1,6 @@
+[gd_resource type="RichTextEffect" script_class="RichTextSuperscript" load_steps=2 format=3 uid="uid://dvurrv0b6vra"]
+
+[ext_resource type="Script" path="res://UI/superscript.gd" id="1_3kj1y"]
+
+[resource]
+script = ExtResource("1_3kj1y")

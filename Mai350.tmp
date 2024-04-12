@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://bpyipirt0odyb"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_mjgno"]
+[ext_resource type="PackedScene" uid="uid://clny3x48gya0" path="res://HUD.tscn" id="2_6ynpk"]
+[ext_resource type="PackedScene" uid="uid://udl8csomnaht" path="res://creature/Creature.tscn" id="3_0udp4"]
+[ext_resource type="Script" path="res://breeding.gd" id="4_d0bx8"]
+
+[sub_resource type="Curve2D" id="Curve2D_67jip"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1032, 344, 0, 0, 0, 0, 1032, 592, 0, 0, 0, 0, 128, 592, 0, 0, 0, 0, 127, 343, 0, 0, 0, 0, 456, 344, 0, 0, 0, 0, 456, 376, 0, 0, 0, 0, 712, 376, 0, 0, 0, 0, 712, 344, 0, 0, 0, 0, 1032, 344)
+}
+point_count = 9
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ulwtg"]
+size = Vector2(1152, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_felyp"]
+size = Vector2(17, 320)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_mjgno")
+
+[node name="Display" parent="." instance=ExtResource("2_6ynpk")]
+
+[node name="Creature" parent="." instance=ExtResource("3_0udp4")]
+unique_name_in_owner = true
+visible = false
+position = Vector2(79, 12)
+
+[node name="Breeding" type="Node" parent="."]
+script = ExtResource("4_d0bx8")
+
+[node name="BabyPath" type="Path2D" parent="."]
+position = Vector2(-2, 12)
+curve = SubResource("Curve2D_67jip")
+
+[node name="BabySpawnLocation" type="PathFollow2D" parent="BabyPath"]
+position = Vector2(1032, 344)
+rotates = false
+
+[node name="BabyZone" type="Area2D" parent="."]
+input_pickable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BabyZone"]
+polygon = PackedVector2Array(128, 360, 456, 360, 456, 392, 712, 392, 712, 360, 1032, 360, 1032, 608, 128, 608)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(576, 649)
+shape = SubResource("RectangleShape2D_ulwtg")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(584, 328)
+shape = SubResource("RectangleShape2D_ulwtg")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1, 476)
+shape = SubResource("RectangleShape2D_felyp")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1152.5, 480)
+shape = SubResource("RectangleShape2D_felyp")
+
+[connection signal="breed" from="." to="Breeding" method="_on_main_breed"]
+[connection signal="create_baby" from="Breeding" to="." method="_on_breeding_create_baby"]
+[connection signal="create_baby" from="Breeding" to="Display" method="_on_breeding_create_baby"]

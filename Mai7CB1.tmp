@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpyipirt0odyb"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_ogug0"]
+[ext_resource type="PackedScene" uid="uid://clny3x48gya0" path="res://HUD.tscn" id="2_6ynpk"]
+[ext_resource type="PackedScene" uid="uid://udl8csomnaht" path="res://creature/Creature.tscn" id="3_0udp4"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_ogug0")
+
+[node name="Display" parent="." instance=ExtResource("2_6ynpk")]
+
+[node name="Creature" parent="." instance=ExtResource("3_0udp4")]
+position = Vector2(79, 12)

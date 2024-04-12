@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqfdmcci2l7p0"]
+
+[ext_resource type="Texture2D" uid="uid://036js8p2hj8w" path="res://art/wall temp texture.png" id="1_31qn5"]
+[ext_resource type="Script" path="res://Delete Later/tester.gd" id="1_sggox"]
+[ext_resource type="Script" path="res://Delete Later/CeilingShape.gd" id="2_50emp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vrpgc"]
+size = Vector2(1910.72, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ju1oc"]
+size = Vector2(26.5, 690)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ctnek"]
+size = Vector2(24.5, 673)
+
+[node name="Walls" type="StaticBody2D"]
+input_pickable = true
+script = ExtResource("1_sggox")
+
+[node name="CeilingShape" type="CollisionShape2D" parent="."]
+position = Vector2(963.359, 399.5)
+shape = SubResource("RectangleShape2D_vrpgc")
+script = ExtResource("2_50emp")
+
+[node name="CeilingSprite" type="Sprite2D" parent="."]
+position = Vector2(960.5, 400)
+scale = Vector2(192.1, 2)
+texture = ExtResource("1_31qn5")
+
+[node name="FloorShape" type="CollisionShape2D" parent="."]
+position = Vector2(967.563, 1074)
+shape = SubResource("RectangleShape2D_vrpgc")
+
+[node name="FloorSprite" type="Sprite2D" parent="."]
+position = Vector2(967.375, 1074)
+scale = Vector2(190.725, 1.7)
+texture = ExtResource("1_31qn5")
+
+[node name="LeftSprite" type="Sprite2D" parent="."]
+position = Vector2(4.5, 738.75)
+scale = Vector2(1.9, 69.75)
+texture = ExtResource("1_31qn5")
+
+[node name="LeftShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, 734)
+shape = SubResource("RectangleShape2D_ju1oc")
+one_way_collision_margin = 0.0
+
+[node name="RightSprite" type="Sprite2D" parent="."]
+position = Vector2(1921, 741)
+scale = Vector2(2.47498, 66.2)
+texture = ExtResource("1_31qn5")
+
+[node name="RightShape" type="CollisionShape2D" parent="."]
+position = Vector2(1921, 733.5)
+shape = SubResource("RectangleShape2D_ctnek")
+
+[connection signal="input_event" from="." to="CeilingShape" method="_on_walls_input_event"]

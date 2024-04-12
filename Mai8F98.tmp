@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpyipirt0odyb"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_mjgno"]
+[ext_resource type="PackedScene" uid="uid://clny3x48gya0" path="res://HUD.tscn" id="2_6ynpk"]
+[ext_resource type="PackedScene" uid="uid://udl8csomnaht" path="res://creature/Creature.tscn" id="3_0udp4"]
+[ext_resource type="Script" path="res://breeding.gd" id="4_d0bx8"]
+
+[sub_resource type="Curve2D" id="Curve2D_67jip"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 352, 0, 0, 0, 0, 1152, 352, 0, 0, 0, 0, 1152, 648, 0, 0, 0, 0, -1, 647, 0, 0, 0, 0, 0, 352)
+}
+point_count = 5
+
+[node name="Main" type="Node"]
+script = ExtResource("1_mjgno")
+
+[node name="Display" parent="." instance=ExtResource("2_6ynpk")]
+
+[node name="Creature" parent="." instance=ExtResource("3_0udp4")]
+unique_name_in_owner = true
+position = Vector2(79, 12)
+
+[node name="Breeding" type="Node" parent="."]
+script = ExtResource("4_d0bx8")
+
+[node name="BabyPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_67jip")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="BabyPath"]
+position = Vector2(0, 352)
+
+[connection signal="breed" from="." to="Breeding" method="_on_main_breed"]
+[connection signal="create_baby" from="Breeding" to="." method="_on_breeding_create_baby"]
+[connection signal="create_baby" from="Breeding" to="Display" method="_on_breeding_create_baby"]

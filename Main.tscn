@@ -1,0 +1,572 @@
+[gd_scene load_steps=10 format=3 uid="uid://bpyipirt0odyb"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_mjgno"]
+[ext_resource type="PackedScene" uid="uid://udl8csomnaht" path="res://creature/Creature.tscn" id="3_0udp4"]
+[ext_resource type="Script" path="res://breeding.gd" id="4_d0bx8"]
+[ext_resource type="PackedScene" uid="uid://cqfdmcci2l7p0" path="res://Walls.tscn" id="5_oljq7"]
+[ext_resource type="Script" path="res://UI/UI.gd" id="5_tad1r"]
+[ext_resource type="RichTextEffect" uid="uid://dvurrv0b6vra" path="res://UI/superscript.tres" id="6_ibhnh"]
+[ext_resource type="Script" path="res://UI/superscript.gd" id="7_sn1gf"]
+
+[sub_resource type="Curve2D" id="Curve2D_67jip"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1800, 500, 0, 0, 0, 0, 1800, 1030, 0, 0, 0, 0, 100, 1030, 0, 0, 0, 0, 100, 500, 0, 0, 0, 0, 830, 500, 0, 0, 0, 0, 830, 550, 0, 0, 0, 0, 1090, 550, 0, 0, 0, 0, 1090, 500, 0, 0, 0, 0, 1800, 500)
+}
+point_count = 9
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_y10x6"]
+script = ExtResource("7_sn1gf")
+
+[node name="Main" type="Node"]
+script = ExtResource("1_mjgno")
+
+[node name="Creature" parent="." instance=ExtResource("3_0udp4")]
+unique_name_in_owner = true
+
+[node name="Breeding" type="Node" parent="."]
+script = ExtResource("4_d0bx8")
+
+[node name="BabyPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_67jip")
+
+[node name="BabySpawnLocation" type="PathFollow2D" parent="BabyPath"]
+position = Vector2(1800, 500)
+rotates = false
+
+[node name="Walls" parent="." instance=ExtResource("5_oljq7")]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 450.0
+offset_right = 1450.0
+offset_bottom = 390.0
+script = ExtResource("5_tad1r")
+
+[node name="Father" type="Panel" parent="HBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="FatherPhenoLabel" type="RichTextLabel" parent="HBoxContainer/Father"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -120.0
+offset_top = 250.0
+offset_right = 120.0
+offset_bottom = 273.0
+grow_horizontal = 2
+bbcode_enabled = true
+text = "Phenotype:
+"
+fit_content = true
+scroll_active = false
+
+[node name="FatherGenoLabel" type="RichTextLabel" parent="HBoxContainer/Father"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -120.0
+offset_top = 290.0
+offset_right = 120.0
+offset_bottom = 313.0
+grow_horizontal = 2
+bbcode_enabled = true
+text = "Genotype:
+"
+fit_content = true
+scroll_active = false
+custom_effects = [ExtResource("6_ibhnh")]
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Father"]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 220.0
+
+[node name="FamilyTreeLabel" type="Label" parent="HBoxContainer/Father/Panel"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 17.0
+offset_right = 250.0
+offset_bottom = 50.0
+text = "Family Tree"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FatherPatGFathLab" type="Label" parent="HBoxContainer/Father/Panel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 60.0
+offset_right = 100.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 10
+text = "Grandfather"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="FatherPatGMothLab" type="Label" parent="HBoxContainer/Father/Panel"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 80.0
+offset_right = 140.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 10
+text = "Grandmother"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="FatherMatGFathLab" type="Label" parent="HBoxContainer/Father/Panel"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 80.0
+offset_right = 250.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 10
+text = "Grandfather"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="FatherMatGMothLab" type="Label" parent="HBoxContainer/Father/Panel"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 60.0
+offset_right = 290.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 10
+text = "Grandmother"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="FatherMotherLabel" type="Label" parent="HBoxContainer/Father/Panel"]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 130.0
+offset_right = 290.0
+offset_bottom = 170.0
+theme_override_font_sizes/font_size = 12
+text = "Mother"
+autowrap_mode = 1
+clip_text = true
+
+[node name="FatherFatherLabel" type="Label" parent="HBoxContainer/Father/Panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 130.0
+offset_right = 110.0
+offset_bottom = 170.0
+theme_override_font_sizes/font_size = 12
+text = "Father"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="FamilyTreeLine1" type="Line2D" parent="HBoxContainer/Father/Panel"]
+points = PackedVector2Array(40, 80, 40, 90, 40, 100, 40, 110, 70.0986, 110, 100, 110, 100, 100)
+width = 2.0
+
+[node name="FamilyTreeLine1b" type="Line2D" parent="HBoxContainer/Father/Panel"]
+points = PackedVector2Array(70, 110, 70, 120, 70, 130)
+width = 2.0
+
+[node name="FamilyTreeLine2" type="Line2D" parent="HBoxContainer/Father/Panel"]
+points = PackedVector2Array(260, 80, 260, 90, 260, 100, 260, 110, 200, 110, 200, 100)
+width = 2.0
+
+[node name="FamilyTreeLine2b" type="Line2D" parent="HBoxContainer/Father/Panel"]
+points = PackedVector2Array(230, 110, 230, 130)
+width = 2.0
+
+[node name="FamilyTreeLine3" type="Line2D" parent="HBoxContainer/Father/Panel"]
+position = Vector2(12, -23)
+scale = Vector2(1, 1.104)
+points = PackedVector2Array(110, 150, 120, 150, 130, 150, 140, 150, 150, 150, 154.55, 150, 160, 150, 170, 150)
+width = 2.0
+
+[node name="FamilyTreeLine3b" type="Line2D" parent="HBoxContainer/Father/Panel"]
+position = Vector2(-78, 32)
+points = PackedVector2Array(230, 110, 230, 130)
+width = 2.0
+
+[node name="FatherNameLabel" type="RichTextLabel" parent="HBoxContainer/Father/Panel"]
+clip_contents = false
+custom_minimum_size = Vector2(300, 20)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 180.0
+offset_right = 150.0
+offset_bottom = 200.0
+grow_horizontal = 2
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Selected" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="SelectedAgeLabel" type="RichTextLabel" parent="HBoxContainer/Selected"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -124.0
+offset_top = 240.0
+offset_right = -4.0
+offset_bottom = 263.0
+grow_horizontal = 2
+bbcode_enabled = true
+text = "
+"
+fit_content = true
+scroll_active = false
+
+[node name="SelectedGenderLabel" type="RichTextLabel" parent="HBoxContainer/Selected"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = 52.0
+offset_right = 116.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "
+"
+fit_content = true
+scroll_active = false
+
+[node name="SelectedPhenoLabel" type="RichTextLabel" parent="HBoxContainer/Selected"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -134.0
+offset_top = 280.0
+offset_right = 126.0
+offset_bottom = 303.0
+grow_horizontal = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+custom_effects = [SubResource("RichTextEffect_y10x6")]
+
+[node name="SelectedGenoLabel" type="RichTextLabel" parent="HBoxContainer/Selected"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -134.0
+offset_top = 320.0
+offset_right = 126.0
+offset_bottom = 343.0
+grow_horizontal = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+custom_effects = [ExtResource("6_ibhnh")]
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Selected"]
+layout_mode = 0
+offset_left = 55.0
+offset_right = 355.0
+offset_bottom = 220.0
+
+[node name="FamilyTreeLabel" type="Label" parent="HBoxContainer/Selected/Panel"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 17.0
+offset_right = 250.0
+offset_bottom = 50.0
+text = "Family Tree"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SelectedPatGFathLab" type="Label" parent="HBoxContainer/Selected/Panel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 60.0
+offset_right = 101.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 10
+text = "Grandfather"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="SelectedPatGMothLab" type="Label" parent="HBoxContainer/Selected/Panel"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 80.0
+offset_right = 140.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 10
+text = "Grandmother"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="SelectedMatGFathLab" type="Label" parent="HBoxContainer/Selected/Panel"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 80.0
+offset_right = 251.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 10
+text = "Grandfather"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="SelectedMatGMothLab" type="Label" parent="HBoxContainer/Selected/Panel"]
+layout_mode = 0
+offset_left = 201.0
+offset_top = 60.0
+offset_right = 290.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 10
+text = "Grandmother"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="SelectedMotherLabel" type="Label" parent="HBoxContainer/Selected/Panel"]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 130.0
+offset_right = 291.0
+offset_bottom = 170.0
+theme_override_font_sizes/font_size = 12
+text = "Mother"
+clip_text = true
+
+[node name="SelectedFatherLabel" type="Label" parent="HBoxContainer/Selected/Panel"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 130.0
+offset_right = 111.0
+offset_bottom = 170.0
+theme_override_font_sizes/font_size = 12
+text = "Father"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="FamilyTreeLine1" type="Line2D" parent="HBoxContainer/Selected/Panel"]
+points = PackedVector2Array(40, 80, 40, 90, 40, 100, 40, 110, 70.0986, 110, 100, 110, 100, 100)
+width = 2.0
+
+[node name="FamilyTreeLine1b" type="Line2D" parent="HBoxContainer/Selected/Panel"]
+points = PackedVector2Array(70, 110, 70, 120, 70, 130)
+width = 2.0
+
+[node name="FamilyTreeLine2" type="Line2D" parent="HBoxContainer/Selected/Panel"]
+points = PackedVector2Array(260, 80, 260, 90, 260, 100, 260, 110, 200, 110, 200, 100)
+width = 2.0
+
+[node name="FamilyTreeLine2b" type="Line2D" parent="HBoxContainer/Selected/Panel"]
+points = PackedVector2Array(230, 110, 230, 130)
+width = 2.0
+
+[node name="FamilyTreeLine3" type="Line2D" parent="HBoxContainer/Selected/Panel"]
+position = Vector2(13, -23)
+scale = Vector2(1, 1.104)
+points = PackedVector2Array(110, 150, 120, 150, 130, 150, 140, 150, 150, 150, 154.55, 150, 160, 150, 170, 150)
+width = 2.0
+
+[node name="FamilyTreeLine3b" type="Line2D" parent="HBoxContainer/Selected/Panel"]
+position = Vector2(-77, 32)
+points = PackedVector2Array(230, 110, 230, 130)
+width = 2.0
+
+[node name="SelectedNameLabel" type="RichTextLabel" parent="HBoxContainer/Selected/Panel"]
+clip_contents = false
+custom_minimum_size = Vector2(300, 20)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -159.0
+offset_top = 180.0
+offset_right = 141.0
+offset_bottom = 200.0
+grow_horizontal = 2
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Mother" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="MotherPhenoLabel" type="RichTextLabel" parent="HBoxContainer/Mother"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -118.0
+offset_top = 250.0
+offset_right = 122.0
+offset_bottom = 273.0
+grow_horizontal = 2
+bbcode_enabled = true
+text = "Phenotype:
+"
+fit_content = true
+scroll_active = false
+custom_effects = [SubResource("RichTextEffect_y10x6")]
+
+[node name="MotherGenoLabel" type="RichTextLabel" parent="HBoxContainer/Mother"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -118.0
+offset_top = 290.0
+offset_right = 122.0
+offset_bottom = 313.0
+grow_horizontal = 2
+bbcode_enabled = true
+text = "Genotype:
+"
+fit_content = true
+scroll_active = false
+custom_effects = [ExtResource("6_ibhnh")]
+
+[node name="Panel" type="Panel" parent="HBoxContainer/Mother"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 302.0
+offset_bottom = 220.0
+
+[node name="FamilyTreeLabel" type="Label" parent="HBoxContainer/Mother/Panel"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 17.0
+offset_right = 250.0
+offset_bottom = 50.0
+text = "Family Tree"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MotherPatGFathLab" type="Label" parent="HBoxContainer/Mother/Panel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 60.0
+offset_right = 100.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 10
+text = "Grandfather"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="MotherPatGMothLab" type="Label" parent="HBoxContainer/Mother/Panel"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 80.0
+offset_right = 140.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 10
+text = "Grandmother"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="MotherMatGFathLab" type="Label" parent="HBoxContainer/Mother/Panel"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 80.0
+offset_right = 250.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 10
+text = "Grandfather"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="MotherMatGMothLab" type="Label" parent="HBoxContainer/Mother/Panel"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 60.0
+offset_right = 290.0
+offset_bottom = 83.0
+theme_override_font_sizes/font_size = 10
+text = "Grandmother"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="MotherMotherLabel" type="Label" parent="HBoxContainer/Mother/Panel"]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 130.0
+offset_right = 290.0
+offset_bottom = 170.0
+theme_override_font_sizes/font_size = 12
+text = "Mother"
+autowrap_mode = 1
+clip_text = true
+
+[node name="MotherFatherLabel" type="Label" parent="HBoxContainer/Mother/Panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 130.0
+offset_right = 110.0
+offset_bottom = 170.0
+theme_override_font_sizes/font_size = 12
+text = "Father"
+horizontal_alignment = 2
+autowrap_mode = 1
+clip_text = true
+
+[node name="FamilyTreeLine1" type="Line2D" parent="HBoxContainer/Mother/Panel"]
+points = PackedVector2Array(40, 80, 40, 90, 40, 100, 40, 110, 70.0986, 110, 100, 110, 100, 100)
+width = 2.0
+
+[node name="FamilyTreeLine1b" type="Line2D" parent="HBoxContainer/Mother/Panel"]
+points = PackedVector2Array(70, 110, 70, 120, 70, 130)
+width = 2.0
+
+[node name="FamilyTreeLine2" type="Line2D" parent="HBoxContainer/Mother/Panel"]
+points = PackedVector2Array(260, 80, 260, 90, 260, 100, 260, 110, 200, 110, 200, 100)
+width = 2.0
+
+[node name="FamilyTreeLine2b" type="Line2D" parent="HBoxContainer/Mother/Panel"]
+points = PackedVector2Array(230, 110, 230, 130)
+width = 2.0
+
+[node name="FamilyTreeLine3" type="Line2D" parent="HBoxContainer/Mother/Panel"]
+position = Vector2(12, -23)
+scale = Vector2(1, 1.104)
+points = PackedVector2Array(110, 150, 120, 150, 130, 150, 140, 150, 150, 150, 154.55, 150, 160, 150, 170, 150)
+width = 2.0
+
+[node name="FamilyTreeLine3b" type="Line2D" parent="HBoxContainer/Mother/Panel"]
+position = Vector2(-78, 32)
+points = PackedVector2Array(230, 110, 230, 130)
+width = 2.0
+
+[node name="MotherNameLabel" type="RichTextLabel" parent="HBoxContainer/Mother/Panel"]
+clip_contents = false
+custom_minimum_size = Vector2(300, 20)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 180.0
+offset_right = 150.0
+offset_bottom = 200.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 0
+bbcode_enabled = true
+text = "text"
+scroll_active = false
+
+[connection signal="age_up" from="." to="Creature" method="_on_main_age_up"]
+[connection signal="breed" from="." to="Breeding" method="_on_main_breed"]
+[connection signal="create_baby" from="Breeding" to="." method="_on_breeding_create_baby"]

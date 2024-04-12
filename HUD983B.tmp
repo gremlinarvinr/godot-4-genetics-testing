@@ -1,0 +1,90 @@
+[gd_scene load_steps=3 format=3 uid="uid://clny3x48gya0"]
+
+[ext_resource type="Script" path="res://HUD.gd" id="1_fordn"]
+[ext_resource type="Script" path="res://LineEdit.gd" id="1_iuprt"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_fordn")
+
+[node name="LineEditLabel" type="Label" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -65.0
+offset_top = -88.0
+offset_right = 50.0
+offset_bottom = -46.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Mother:"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -340.5
+offset_top = -31.0
+offset_right = 340.5
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_iuprt")
+
+[node name="Mother" type="Label" parent="."]
+anchors_preset = -1
+offset_left = 200.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Mother"
+
+[node name="MotherGeno" type="Label" parent="."]
+visible = false
+offset_left = 205.0
+offset_top = 42.0
+offset_right = 245.0
+offset_bottom = 77.0
+theme_override_font_sizes/font_size = 25
+text = "Bb"
+horizontal_alignment = 1
+
+[node name="Father" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_right = -200.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "Father"
+
+[node name="FatherGeno" type="Label" parent="."]
+visible = false
+offset_left = 876.0
+offset_top = 42.0
+offset_right = 916.0
+offset_bottom = 77.0
+theme_override_font_sizes/font_size = 25
+text = "Bb"
+horizontal_alignment = 1
+
+[node name="Children" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.5
+offset_top = -21.0
+offset_right = 40.5
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Children
+"

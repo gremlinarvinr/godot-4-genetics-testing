@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://udl8csomnaht"]
+
+[ext_resource type="Script" path="res://creature/Creature.gd" id="1_rskya"]
+[ext_resource type="Script" path="res://creature/CreatureBody.gd" id="2_qdgs5"]
+[ext_resource type="Texture2D" uid="uid://cvrm72hkavpmj" path="res://art/dragon sprite bnw.png" id="3_g8s5f"]
+
+[node name="Creature" type="Node2D"]
+visible = false
+script = ExtResource("1_rskya")
+metadata/_edit_group_ = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." groups=["creatures"]]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+disable_mode = 1
+input_pickable = true
+script = ExtResource("2_qdgs5")
+
+[node name="Sprite" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("3_g8s5f")
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="CharacterBody2D"]
+polygon = PackedVector2Array(-48, -102.4, -48, -100.9, -27.3, -82, -24.3, -82, -17.4, -85, 19, -85, 19, -83.7, 26.5, -82.3, 55.3, -107, 68, -107, 68, -104.9, 75, -98.9, 75, -95.4, 80, -82.4, 80, -66, 81.1, -45, 79.7, -45, 78.4, -36, 94, -46.1, 94, -47.7, 126.1, -85, 128.5, -85, 143.4, -94, 149.6, -94, 150, -92.4, 150, -86, 149.3, -86, 138, -65.4, 138, -53, 141.3, -48.1, 140.2, -46, 138.7, -46, 127, -36.1, 127, -34.4, 114, -14.4, 114, -7.89999, 113.1, 7, 113.7, 7, 116.3, 25, 111.1, 25, 102.1, 15, 100.5, 15, 93, 11.3, 93, 14, 94.3, 23, 91.1, 23, 85, 24.5, 85, 31.6, 77, 33.5, 65.1, 53, 63.7, 53, 53, 60.1, 53, 63.4, 44.3, 84, 42.8, 84, 34.8, 92, 26.1, 92, 7.10001, 70, -6.10001, 70, -19, 80.9, -19, 82.7, -26, 92, -36, 92, -36, 90, -45, 83, -45, 80.4, -52.4, 61, -53.7, 61, -66, 52, -66, 49.6, -76.1, 34, -79.5, 34, -85, 31.2, -85, 25, -89.6, 25, -94, 22.1, -94, 13.4, -91.6, 9.5, -101, 14.3, -101, 14.9, -113.7, 25.3, -116, 24.3, -116, 16.6, -113, 8.60001, -113, -8, -113.8, -13, -126.3, -35, -141, -47.1, -141, -49.5, -137, -56.5, -137, -60.6, -137.7, -64, -150, -85.7, -150, -93, -139, -93, -139, -91.2, -125, -84.2, -125, -82.9, -114, -73.9, -114, -71.7, -95, -47, -93.1, -47, -88.1, -41, -86.6, -41, -78.1, -37.1, -81, -46.7, -81, -66.1, -79.9, -84, -78.5, -84, -74.6, -100, -72.7, -100, -66, -105.9, -66, -108.8)
+
+[connection signal="input_event" from="CharacterBody2D" to="." method="_on_character_body_2d_input_event"]
